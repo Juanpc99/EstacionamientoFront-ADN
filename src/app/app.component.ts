@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'Estacionamiento';
   public companies: MenuItem[] = [
     { url: '/espacio', nombre: 'Espacios' },
-    { url: '/vehiculo', nombre: 'Vehiculos' }
+    { url: '/vehiculo', nombre: 'Vehículos' }
     
   ];
 
