@@ -15,6 +15,5 @@ export class ListarVehiculosComponent implements OnInit{
     constructor(protected vehiculoService: VehiculoService){}
 
     ngOnInit(){
-       this.listaVehiculos = this.vehiculoService.consultar(); 
     }
 }

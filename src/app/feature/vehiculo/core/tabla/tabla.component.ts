@@ -9,13 +9,10 @@ import { Vehiculo } from '../../shared/models/vehiculo';
 })
 export class TablaComponent implements OnInit {
   @Input() vehiculosO: Observable<Vehiculo[]>;
-  public vehiculos: Vehiculo[];
+
   constructor() { }
 
-  ngOnInit(){
-    this.vehiculosO.subscribe(a =>{
-      this.vehiculos = a
-    });
-  }
+  ngOnInit(){};
+  
 
 }

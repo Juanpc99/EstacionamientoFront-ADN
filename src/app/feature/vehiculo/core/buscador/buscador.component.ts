@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+
 import { Vehiculo } from '../../shared/models/vehiculo';
 import { VehiculoService } from '../../shared/service/vehiculo.service';
 
@@ -8,21 +8,32 @@ import { VehiculoService } from '../../shared/service/vehiculo.service';
   templateUrl: './buscador.component.html',
   styleUrls: ['./buscador.component.css']
 })
-export class BuscadorComponent  implements OnInit{
+export class BuscadorComponent{
 
-  hayError: boolean = false;
   termino: string = '';
-  vehiculos: Observable<Vehiculo[]>;
-  
-  constructor(private vehiculoService: VehiculoService) { }
- ngOnInit(){
-   this.vehiculos = this.vehiculoService.consultar();
- }
-  
+  vehiculos: Vehiculo[] = [];
+  todosVehiculos: Vehiculo[] = []
+  hayError: boolean = false;
+  constructor(private vehiculoService: VehiculoService) {
+    this.vehiculoService.consultar().subscribe((vehiculos) => {
+      this.todosVehiculos = vehiculos;
+    })
+   }
+
+  buscar(termino:string){
+    this.termino = termino;
+    this.hayError = false
+    this.vehiculoService.consultarPorPlaca(this.termino)
+      .subscribe((vehiculos) => {
+        this.vehiculos = vehiculos;
+        if(vehiculos.length === 0){
+          this.hayError = true;
+        }
+      });
+  }
   
   sugerencias(termino){
-    this.hayError = false;
-    console.log(termino);
+    this.termino = termino;
   }
 
 }

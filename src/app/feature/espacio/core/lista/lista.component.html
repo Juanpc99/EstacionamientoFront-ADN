@@ -3,7 +3,8 @@
     <div *ngFor="let item of listaEspacios |async"
           class = "col-md-2 col-sm-6">
       <div class="card">
-        <img *ngIf="item.estado == 'D' ; else noDisponible"
+        <img [routerLink]="['/agregar', item.id]"
+          *ngIf="item.estado == 'D' ; else noDisponible"
           src="assets/espacios/espacio-disponible.jpg" 
           class="card-img-top"
           >
@@ -13,12 +14,14 @@
             </p>
           </div>
       </div>
+      <ng-template #noDisponible>
+        <img src="assets/espacios/espacio-ocupado.jpg"
+              class="card-img-top"
+              [routerLink]="['/sacar', item.id]"
+        >
+      </ng-template>
     </div>
   </div>
   
-  <ng-template #noDisponible>
-    <img src="assets/espacios/espacio-ocupado.jpg"
-          class="card-img-top"
-    >
-  </ng-template>
+ 
   
